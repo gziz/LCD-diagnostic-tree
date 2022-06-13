@@ -1,3 +1,12 @@
+;;;
+Equipo -
+Gerardo Moreno Zizumbo A01734876
+Sofía Ingigerth Cañas Urbina A01173828
+Cristina López Ontiveros A01424566
+Ricardo de Jesús Balam Ek A00831262
+;;;
+
+
 (deffunction pregunta-usuario (?pregunta $?opciones)
 	(printout t crlf ?pregunta ?opciones "? ")
 	(bind ?respuesta (read))
@@ -11,7 +20,7 @@
 
 ;1
 (defrule inicio
-	(initial fact)
+	(initial-fact)
 =>
 	(assert (liveBIOSscreen (pregunta-usuario "Live BIOS splash screen?" yes no)))
 )
@@ -132,7 +141,8 @@
 (defrule thin-lines-tiny-spots
 	(thinLinesTinySpots yes)
 =>
-	(printout t crlf "When tiny spots or screen length lines are always present, LCD is failing (or dirty)." crlf crlf)
+	;(printout t crlf "When tiny spots or screen length lines are always present, LCD is failing (or dirty)." crlf crlf)
+	(assert (screenCleanFix (pregunta-usuario "Has cleaning the screen removed the lines and dots?" yes no)))
 )
 
 ;19
@@ -209,4 +219,35 @@
 	(totalBlackouts yes)
 =>
 	(printout t crlf "If entering hibernation, check lid switch. Going to sleep, check power saver settings, screensaver. Try toggling LCD/external monitor." crlf crlf)
+)
+
+; Añadidas por el equipo
+
+;30
+(defrule screen-clean-fix
+	(screenCleanFix yes)
+=>
+	(printout t crlf "Lucky!" crlf crlf)
+)
+
+;31
+(defrule no-screen-clean-fix
+	(screenCleanFix no)
+=>
+	(assert (annoyanceHigh (pregunta-usuario "Is the annoyance caused by the lines and dots worth buying a new LCD?" yes no)))
+)
+
+;32
+(defrule no-annoyance-high
+	(annoyanceHigh no)
+=>
+	(printout t crlf "A thin vertical line on the screen is almost certainly either a failed column driver, or a broken connection between the column driver and the pixel array.")
+	(printout t crlf "Either way, it’s unlikely to get worse, but it definitely won’t get better by itself, either." crlf crlf)
+)
+
+;33
+(defrule annoyance-high
+	(annoyanceHigh yes)
+=>
+	(printout t crlf "Replace LCD" crlf crlf)
 )
