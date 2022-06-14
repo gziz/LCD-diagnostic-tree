@@ -6,7 +6,10 @@ Cristina López Ontiveros A01424566
 Ricardo de Jesús Balam Ek A00831262
 ;;;
 
-
+;;; Se define la función pregunta-usuario, se define la variable "pregunta" y la variable de varios elementos "opciones".
+Se lee la respuesta y mientras no esté en el conjunto se vuelve a preguntar, cuando ya está en el conjunto se retorna 
+la variable "respuesta".
+;;;
 (deffunction pregunta-usuario (?pregunta $?opciones)
 	(printout t crlf ?pregunta ?opciones "? ")
 	(bind ?respuesta (read))
@@ -19,6 +22,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;1
+;;; Se define la regla de inicio y se agrega el hecho de la pregunta en la posición 1, con posibles opciones
+de respuesta "yes" o "no"
+;;;
 (defrule inicio
 	(initial-fact)
 =>
@@ -26,6 +32,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;2
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 1, es "no" y se agrega el hecho de la 
+pregunta en la posición 2, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-live-BIOS-screen
 	(liveBIOSscreen no)
 =>
@@ -33,6 +42,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;3
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 2 es "no" y se agrega el hecho de la 
+pregunta en la posición 3, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-live-external-display
 	(liveExternalDisplay no)
 =>
@@ -40,6 +52,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;4
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 3 es "yes" y se despliega el string
+localizado en la posición 4
+;;;
 (defrule fan-harddrive-sound
 	(fanHarddriveSound yes)
 =>
@@ -47,6 +62,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;5
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 3 es "no" y se despliega el string
+localizado en la posición 5
+;;;
 (defrule no-fan-harddrive-sound
 	(fanHarddriveSound no)
 =>
@@ -54,6 +72,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;6
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 2 es "yes" y se agrega el hecho de la 
+pregunta en la posición 6, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule live-external-display
 	(liveExternalDisplay yes)
 =>
@@ -61,6 +82,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;7
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 6 es "yes" y se agrega el hecho de la 
+pregunta en la posición 7, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule dim-desktop-image
 	(dimDesktopImage yes)
 =>
@@ -68,6 +92,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;8
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 7 es "yes" y se despliega el string
+localizado en la posición 8
+;;;
 (defrule test-inverter-OK
 	(testInverterOK yes)
 =>
@@ -75,6 +102,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;9
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 7 es "no" y se despliega el string
+localizado en la posición 9
+;;;
 (defrule no-test-inverter-OK
 	(testInverterOK no)
 =>
@@ -82,6 +112,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;10
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 6 es "no" y se agrega el hecho de la 
+pregunta en la posición 10, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-dim-desktop-image
 	(dimDesktopImage no)
 =>
@@ -89,6 +122,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;11
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 10 es "no" y se despliega el string
+localizado en la posición 11
+;;;
 (defrule no-redo-connections-fix
 	(redoConnectionsFix no)
 =>
@@ -96,6 +132,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;12
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 10 es "yes" y se despliega el string
+localizado en la posición 12
+;;;
 (defrule redo-connections-fix
 	(redoConnectionsFix yes)
 =>
@@ -103,6 +142,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;13
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 1 es "yes" y se agrega el hecho de la 
+pregunta en la posición 13, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule live-BIOS-screen
 	(liveBIOSscreen yes)
 =>
@@ -110,6 +152,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;14
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 13 es "no" y se agrega el hecho de la 
+pregunta en la posición 14, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-live-desktop-OS
 	(liveDesktopsOS no)
 =>
@@ -117,6 +162,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;15
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 14 es "no" y se despliega el string
+localizado en la posición 15
+;;;
 (defrule no-boots-wo-display
 	(bootsWoDisplay no)
 =>
@@ -124,6 +172,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;16
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 14 es "yes" y se despliega el string
+localizado en la posición 16
+;;;
 (defrule boots-wo-display
 	(bootsWoDisplay yes)
 =>
@@ -131,6 +182,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;17
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 13 es "yes" y se agrega el hecho de la 
+pregunta en la posición 17, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule live-desktop-OS
 	(liveDesktopsOS yes)
 =>
@@ -138,6 +192,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;18
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 17 es "yes" y se agrega el hecho de la 
+pregunta en la posición 18, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule thin-lines-tiny-spots
 	(thinLinesTinySpots yes)
 =>
@@ -146,6 +203,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;19
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 17 es "no" y se agrega el hecho de la 
+pregunta en la posición 19, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-thin-lines-tiny-spots
 	(thinLinesTinySpots no)
 =>
@@ -153,6 +213,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;20
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 19 es "yes" y se despliega el string
+localizado en la posición 20
+;;;
 (defrule image-upside-down-sideways
 	(imageUpsideDownSideways yes)
 =>
@@ -160,6 +223,10 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;21
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 19 es "no" y se agrega el hecho de la 
+pregunta en la posición 21, con posibles opciones de respuesta "yes" o "no"
+;;;
+
 (defrule no-image-upside-down-sideways
 	(imageUpsideDownSideways no)
 =>
@@ -167,6 +234,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;22
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 21 es "yes" y se despliega el string
+localizado en la posición 22
+;;;
 (defrule red-orange-tint
 	(RedOrangeTint yes)
 =>
@@ -174,6 +244,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;23
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 21 es "no" y se agrega el hecho de la 
+pregunta en la posición 23, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-red-orange-tint
 	(RedOrangeTint no)
 =>
@@ -181,6 +254,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;24
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 23 es "yes" y se despliega el string
+localizado en la posición 24
+;;;
 (defrule display-scrambles
 	(displayScrambles yes)
 =>
@@ -188,6 +264,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;25
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 23 es "no" y se agrega el hecho de la 
+pregunta en la posición 25, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule display-scrambles
 	(displayScrambles no)
 =>
@@ -195,12 +274,19 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;26
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 25 es "yes" y se despliega el string
+localizado en la posición 26
+;;;
 (defrule stain-growing-plume
 	(stainGrowingPlume yes)
 =>
 	(printout t crlf "LCD rupture, liquid crystal leak, replace LCD." crlf crlf)
 )
+
 ;27
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 25 es "no" y se agrega el hecho de la 
+pregunta en la posición 27, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-stain-growing-plume
 	(stainGrowingPlume no)
 =>
@@ -208,6 +294,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;28
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 27 es "no" y se despliega el string
+localizado en la posición 28
+;;;
 (defrule no-total-blackouts
 	(totalBlackouts no)
 =>
@@ -215,6 +304,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;29
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 27 es "yes" y se despliega el string
+localizado en la posición 29
+;;;
 (defrule total-blackouts
 	(totalBlackouts yes)
 =>
@@ -224,6 +316,9 @@ Ricardo de Jesús Balam Ek A00831262
 ; Añadidas por el equipo
 
 ;30
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 18 es "yes" y se despliega el string
+localizado en la posición 30
+;;;
 (defrule screen-clean-fix
 	(screenCleanFix yes)
 =>
@@ -231,6 +326,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;31
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 18 es "no" y se agrega el hecho de la 
+pregunta en la posición 31, con posibles opciones de respuesta "yes" o "no"
+;;;
 (defrule no-screen-clean-fix
 	(screenCleanFix no)
 =>
@@ -238,6 +336,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;32
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 31 es "no" y se despliega el string
+localizado en la posición 32
+;;;
 (defrule no-annoyance-high
 	(annoyanceHigh no)
 =>
@@ -246,6 +347,9 @@ Ricardo de Jesús Balam Ek A00831262
 )
 
 ;33
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 31 es "yes" y se despliega el string
+localizado en la posición 33
+;;;
 (defrule annoyance-high
 	(annoyanceHigh yes)
 =>
