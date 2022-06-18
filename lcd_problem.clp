@@ -380,7 +380,7 @@ localizado en la posición 34
 ;;; Se define la regla cuando la respuesta a la pregunta en la posición 26 es "no" y se despliega el string
 localizado en la posición 35
 ;;;
-(defrule stains-on-the-edges
+(defrule no-stains-on-the-edges
 	(stainsOnTheEdges no)
 =>
 	(printout t crlf "Stains concentrated in the middle of the screen are usually accompanied by cracks and indicate external physical damage, LCD rupture and liquid crystal leak. Replace LCD" crlf crlf)
