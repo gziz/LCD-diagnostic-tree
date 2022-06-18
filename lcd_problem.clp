@@ -1,15 +1,21 @@
 ;;;
-Equipo -
+Equipo 6-
 Gerardo Moreno Zizumbo A01734876
 Sofía Ingigerth Cañas Urbina A01173828
 Cristina López Ontiveros A01424566
 Ricardo de Jesús Balam Ek A00831262
 ;;;
 
-;;; Se define la función pregunta-usuario, se define la variable "pregunta" y la variable de varios elementos "opciones".
-Se lee la respuesta y mientras no esté en el conjunto se vuelve a preguntar, cuando ya está en el conjunto se retorna 
-la variable "respuesta".
 ;;;
+	RULES
+;;;
+
+;;; 
+Se define la función pregunta-usuario, con parámetros la variable "pregunta" y la variable de varios 
+elementos "opciones". Se lee la respuesta y mientras no esté en el conjunto se vuelve a preguntar por medio
+de un ciclo while, cuando ya está en el conjunto se retorna la variable "respuesta".
+;;;
+
 (deffunction pregunta-usuario (?pregunta $?opciones)
 	(printout t crlf ?pregunta ?opciones "? ")
 	(bind ?respuesta (read))
@@ -20,6 +26,10 @@ la variable "respuesta".
 	)
 	(return ?respuesta)
 )
+
+;;;
+	TEMPLATES
+;;;
 
 ;1
 ;;; Se define la regla de inicio y se agrega el hecho de la pregunta en la posición 1, con posibles opciones
@@ -274,13 +284,13 @@ pregunta en la posición 25, con posibles opciones de respuesta "yes" o "no"
 )
 
 ;26
-;;; Se define la regla cuando la respuesta a la pregunta en la posición 25 es "yes" y se despliega el string
-localizado en la posición 26
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 25 es "yes" y se agrega el hecho de la 
+pregunta en la posición 26, con posibles opciones de respuesta "yes" o "no"
 ;;;
 (defrule stain-growing-plume
 	(stainGrowingPlume yes)
 =>
-	(printout t crlf "LCD rupture, liquid crystal leak, replace LCD." crlf crlf)
+	(assert (stainsOnTheEdges (pregunta-usuario "Stains appear mainly on the edges of the screen?" yes no)))
 )
 
 ;27
@@ -343,7 +353,7 @@ localizado en la posición 32
 	(annoyanceHigh no)
 =>
 	(printout t crlf "A thin vertical line on the screen is almost certainly either a failed column driver, or a broken connection between the column driver and the pixel array.")
-	(printout t crlf "Either way, it’s unlikely to get worse, but it definitely won’t get better by itself, either." crlf crlf)
+	(printout t crlf "Either way, it's unlikely to get worse, but it definitely won't get better by itself, either." crlf crlf)
 )
 
 ;33
@@ -354,4 +364,24 @@ localizado en la posición 33
 	(annoyanceHigh yes)
 =>
 	(printout t crlf "Replace LCD" crlf crlf)
+)
+
+;34
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 26 es "yes" y se despliega el string
+localizado en la posición 34
+;;;
+(defrule stains-on-the-edges
+	(stainsOnTheEdges yes)
+=>
+	(printout t crlf "The cause is seal damage due to possible contact with acid-base liquids. LCD is broken and there is a liquid crystal leak. Replace LCD" crlf crlf)
+)
+
+;35
+;;; Se define la regla cuando la respuesta a la pregunta en la posición 26 es "no" y se despliega el string
+localizado en la posición 35
+;;;
+(defrule stains-on-the-edges
+	(stainsOnTheEdges no)
+=>
+	(printout t crlf "Stains concentrated in the middle of the screen are usually accompanied by cracks and indicate external physical damage, LCD rupture and liquid crystal leak. Replace LCD" crlf crlf)
 )
